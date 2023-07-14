@@ -196,3 +196,32 @@ FROM Orders JOIN [Order Details]
 ON Orders.OrderID=[Order Details].OrderID
 WHERE Orders.Freight > (SELECT MAX(Freight) FROM Orders WHERE MONTH(ShippedDate)=10)
 GROUP BY Orders.OrderID
+
+
+
+
+ 
+SELECT
+    COALESCE(Color, 'Nije unijeta vrijednost') AS Boja,
+    COUNT(*) AS BrojZapisa
+FROM Production.Product
+GROUP BY Color WITH ROLLUP;
+
+
+
+/* 11
+Koristeći tabele HumanResources.Employee i HumanResources.EmployeeDepartmentHistory kreirati upit koji će dati pregled ukupno ostaverenih bolovanja
+(SickLeaveHours) po departmentu, pri čemu će se uzeti u obzir samo one osobe čiji nacionalni broj počinje ciframa 10, 20, 80 ili 90.
+*/
+select top 5 * from HumanResources.Employee
+select top 5 * from HumanResources.EmployeeDepartmentHistory
+
+select
+	EDH.DepartmentID, 
+	sum(E.SickLeaveHours) as Suma
+from 
+	HumanResources.Employee as E
+	join HumanResources.EmployeeDepartmentHistory as EDH
+		on E.BusinessEntityID = EDH.BusinessEntityID
+where left(E.NationalIDNumber,2) in ('10', '20', '80', '90')
+group by EDH.DepartmentID
