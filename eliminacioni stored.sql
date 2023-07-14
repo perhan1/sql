@@ -16,7 +16,8 @@ Za zagrijavanje
 		- MaxOrderQty i (ProductVendor)
 		- Razlika kao razliku maksimalne i minimalne naručene količine. 
 		
-		Dati odgovarajuće nazive. Proceduru kreirati tako da je prilikom izvršavanja moguće unijeti bilo koji broj parametara (možemo ostaviti bilo koje parametar bez unijete vrijednosti), te da procedura daje rezultat ako je unijeta vrijednost bilo kojeg parametra. 
+		Dati odgovarajuće nazive. Proceduru kreirati tako da je prilikom izvršavanja moguće unijeti bilo koji broj parametara (možemo ostaviti bilo koje 
+parametar bez unijete vrijednosti), te da procedura daje rezultat ako je unijeta vrijednost bilo kojeg parametra. 
 		Zapisi u proceduri trebaju biti sortirani po vrijednostima parametra ListPrice.
     Nakon kreiranja pokrenuti proceduru za sljedeće vrijednosti parametara:
         1. MaxOrderQty = 1000
