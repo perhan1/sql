@@ -1,5 +1,7 @@
 ﻿/*
-6.Iz tabela Categories, Products i Suppliers baze Northwind prikazati naziv isporučitelja (dobavljača), mjesto i državu isporučitelja (dobavljača) i naziv(e) proizvoda iz kategorije napitaka (pića) kojih na stanju ima više od 30 jedinica. Rezultat upita sortirati po državi.
+6.Iz tabela Categories, Products i Suppliers baze Northwind prikazati naziv isporučitelja (dobavljača), mjesto i državu isporučitelja (dobavljača) i naziv(e) 
+proizvoda iz kategorije napitaka (pića) kojih 
+na stanju ima više od 30 jedinica. Rezultat upita sortirati po državi.
 */
 select top 2 * from NORTHWND.dbo.Categories
 select top 2 * from NORTHWND.dbo.Products
@@ -48,7 +50,8 @@ from Orders
 where ShipRegion is null
 
 /*
-b) Upotrebom tabela Customers i Orders baze Northwind prikazati ID kupca pri čemu u polje regija kupovine (ShipRegion) nije unijeta vrijednost, uz uslov da je kupac obavio narudžbu (kupac iz tabele Customers postoji u tabeli Orders). Rezultat sortirati u rastućem redoslijedu.*/
+b) Upotrebom tabela Customers i Orders baze Northwind prikazati ID kupca pri čemu u polje regija kupovine (ShipRegion) nije unijeta vrijednost, uz uslov da je
+	kupac obavio narudžbu (kupac iz tabele Customers postoji u tabeli Orders). Rezultat sortirati u rastućem redoslijedu.*/
 
 select CustomerID from Customers
 intersect
@@ -57,7 +60,8 @@ where ShipRegion is null
 order by 1
 
 /*
-c) Upotrebom tabela Customers i Orders baze Northwind prikazati ID kupca pri čemu u polje regija kupovine nije unijeta vrijednost i kupac nije obavio ni jednu narudžbu (kupac iz tabele Customers ne postoji u tabeli Orders).
+c) Upotrebom tabela Customers i Orders baze Northwind prikazati ID kupca pri čemu u polje regija kupovine nije unijeta vrijednost i kupac nije obavio ni 
+	jednu narudžbu (kupac iz tabele Customers ne postoji u tabeli Orders).
 Rezultat sortirati u rastućem redoslijedu.*/
 select CustomerID from Customers
 except
@@ -66,7 +70,9 @@ where ShipRegion is null
 order by 1
 
 /*
-9. Iz tabele HumanResources.Employee baze AdventureWorks2014 prikazati po 5 zaposlenika muškog, odnosno, ženskog pola uz navođenje sljedećih podataka: radno mjesto na kojem se nalazi, datum rođenja, korisnicko ime i godine starosti. Korisničko ime je dio podatka u LoginID. Rezultate sortirati prema polu uzlaznim, a zatim prema godinama starosti silaznim redoslijedom.*/
+9. Iz tabele HumanResources.Employee baze AdventureWorks2014 prikazati po 5 zaposlenika muškog, odnosno, ženskog pola uz navođenje sljedećih podataka:
+	radno mjesto na kojem se nalazi, datum rođenja, korisnicko ime i godine starosti. Korisničko ime je dio podatka u LoginID. Rezultate sortirati prema polu 
+	uzlaznim, a zatim prema godinama starosti silaznim redoslijedom.*/
 
 --kombinacija funkcija left, right i charindex
 
@@ -99,7 +105,9 @@ where Gender='F'
 order by Gender, 5 desc
 
 /*
-10. Iz tabele HumanResources.Employee baze AdventureWorks2014 prikazati po 2 zaposlenika  bez obzira da li su u braku ili ne i obavljaju poslove inžinjera uz navođenje sljedećih podataka: radno mjesto na kojem se nalazi, datum zaposlenja i bračni status. Ako osoba nije u braku plaća dodatni porez, inače ne plaća. Rezultate sortirati prema bračnom statusu uzlaznim, a zatim prema stažu silaznim redoslijedom.
+10. Iz tabele HumanResources.Employee baze AdventureWorks2014 prikazati po 2 zaposlenika  bez obzira da li su u braku ili ne i obavljaju poslove inžinjera uz 
+	navođenje sljedećih podataka: radno mjesto na kojem se nalazi, datum zaposlenja i bračni status. Ako osoba nije u braku plaća dodatni porez, inače ne plaća. 
+	Rezultate sortirati prema bračnom statusu uzlaznim, a zatim prema stažu silaznim redoslijedom.
 */
 select JobTitle, * from HumanResources.Employee
 --Kolone? Radno mjesto (JobTitle), Datum zaposlenja (HireDate), Bračni status (MaritalStatus), Status poreza ('plaća porez' ili 'ne plaća porez')
@@ -123,7 +131,10 @@ where JobTitle like '%engineer%' and JobTitle not like '%engineering%' and Marit
 order by MaritalStatus asc, HireDate desc
 
 /*
-11. Iz tabela HumanResources.Employee i Person.Person prikazati po 5 osoba prema tome da li žele primati email ponude od AdventureWorksa uz navođenje sljedećih polja: ime i prezime osobe kao jedinstveno polje, organizacijski nivo na kojem se nalazi i da li prima email promocije. Pored ovih uvesti i polje koje će, u ovisnosti od sadržaja polja EmailPromotion, davati poruke: Ne prima, Prima selektirane i Prima. Uslov je da uposlenici rade na 1. ili 4. organizacijskom nivou. Rezultat sortirati prema organizacijskom nivou i dodatno uvedenom polju.
+11. Iz tabela HumanResources.Employee i Person.Person prikazati po 5 osoba prema tome da li žele primati email ponude od AdventureWorksa uz navođenje
+	sljedećih polja: ime i prezime osobe kao jedinstveno polje, organizacijski nivo na kojem se nalazi i da li prima email promocije. 
+	Pored ovih uvesti i polje koje će, u ovisnosti od sadržaja polja EmailPromotion, davati poruke: Ne prima, Prima selektirane i Prima.
+	Uslov je da uposlenici rade na 1. ili 4. organizacijskom nivou. Rezultat sortirati prema organizacijskom nivou i dodatno uvedenom polju.
 */
 select	top 5 Person.Person.FirstName + ' ' + Person.Person.LastName,
 		HumanResources.Employee.OrganizationLevel, 
@@ -154,7 +165,9 @@ where	HumanResources.Employee.OrganizationLevel in (1,4) and
 order by 3, 4
 
 /*
-12. Iz tabela Sales.SalesOrderDetail i Production.Product prikazati 10 najskupljih stavki prodaje uz navođenje polja: naziv proizvoda, količina, cijena i iznos. Cijenu i iznos zaokružiti na dvije decimale. Iz naziva proizvoda odstraniti posljednji dio koji sadržava cifre i zarez. U rezultatu u polju količina na broj dodati 'kom.', a u polju cijena i iznos na broj dodati 'KM'.*/
+12. Iz tabela Sales.SalesOrderDetail i Production.Product prikazati 10 najskupljih stavki prodaje uz navođenje polja: naziv proizvoda, količina, cijena i iznos. Cijenu
+	i iznos zaokružiti na dvije decimale. Iz naziva proizvoda odstraniti posljednji dio koji sadržava cifre i zarez. U rezultatu u polju količina na broj dodati
+	'kom.', a u polju cijena i iznos na broj dodati 'KM'.*/
 select	top 10 left (P.Name, CHARINDEX (',', P.Name)-1) naziv, 
 		cast (SOD.OrderQty as varchar) + ' kom.' broj,
 		convert (varchar, ROUND (SOD.UnitPrice,2)) + ' KM' cijena, 
@@ -201,7 +214,8 @@ where Freight > all (select Freight from Orders where OrderDate between '1997-12
 --AdventureWorks2014
 
 /* 2 
-Koristeći tabele Production.Product i Production.WorkOrder kreirati upit sa podupitom koji će dati sumu OrderQty po nazivu proizvoda pri čemu se izostavljaju zapisi u kojima je suma NULL vrijednost. Upit treba da sadrži naziv proizvoda i sumu po nazivu.
+Koristeći tabele Production.Product i Production.WorkOrder kreirati upit sa podupitom koji će dati sumu OrderQty po nazivu proizvoda pri čemu se izostavljaju
+	zapisi u kojima je suma NULL vrijednost. Upit treba da sadrži naziv proizvoda i sumu po nazivu.
 */
 select top 2 * from Production.Product
 select top 2 * from Production.WorkOrder
@@ -247,7 +261,9 @@ where (select count(*) from Sales.SpecialOfferProduct where
 		
 --AdventureWorks2014
 /* 5
-Koristeći tabele SpecialOfferProduct i SpecialOffer prebrojati broj narudžbi po kategorijama popusta od 0 do 15%, pri čemu treba uvesti novu kolona kategorija u koju će biti unijeta vrijednost popusta, npr. 0, 1, 2... Rezultat sortirati prema koloni kategorija u rastućem redoslijedu. Upit treba da vrati kolone: SpecialOfferID, prebrojani broj i kategorija.
+Koristeći tabele SpecialOfferProduct i SpecialOffer prebrojati broj narudžbi po kategorijama popusta od 0 do 15%, pri čemu treba uvesti novu kolona kategorija u 
+	koju će biti unijeta vrijednost popusta, npr. 0, 1, 2... Rezultat sortirati prema koloni kategorija u rastućem redoslijedu. 
+	Upit treba da vrati kolone: SpecialOfferID, prebrojani broj i kategorija.
 */
 select top 2 * from Sales.SpecialOfferProduct
 select top 10 * from Sales.SpecialOffer
@@ -304,7 +320,8 @@ group by SOP.SpecialOfferID
 order by 3
 
 /* 6
-Koristeći tabele Sales.Store i Sales.Customer kreirati upit kojim će se prebrojati koliko kupaca po teritorijama pokriva prodavac. Rezultat sortirati prema prodavcu i teritoriji.*/
+Koristeći tabele Sales.Store i Sales.Customer kreirati upit kojim će se prebrojati koliko kupaca po teritorijama pokriva prodavac. 
+	Rezultat sortirati prema prodavcu i teritoriji.*/
 select top 3 * from Sales.Store
 select top 3 * from Sales.Customer
 
@@ -320,7 +337,8 @@ from Sales.Store as S
 group by S.SalesPersonID, C.TerritoryID
 order by 1, 2
 /* 7
-Koristeći kolonu AccountNumber tabele Sales.Customer prebrojati broj zapisa prema broju cifara brojčanog dijela podatka iz ove kolone. Rezultat sortirati u rastućem redoslijedu.
+Koristeći kolonu AccountNumber tabele Sales.Customer prebrojati broj zapisa prema broju cifara brojčanog dijela podatka iz ove kolone. 
+	Rezultat sortirati u rastućem redoslijedu.
 */
 select * from Sales.Customer
 --Poigrajte se sa funkcijama za rad sa stringovima: left i right, len
@@ -334,7 +352,8 @@ order by 1
 --JOIN
 --AdventureWorks2014
 /* 8
-Koristeći tabele Person.Address, Sales.SalesOrderDetail i Sales.SalesOrderHeader kreirati upit koji će dati sumu naručenih količina po gradu i godini isporuke koje su izvršene poslije 2012. godine.
+Koristeći tabele Person.Address, Sales.SalesOrderDetail i Sales.SalesOrderHeader kreirati upit koji će dati sumu naručenih količina po gradu i godini 
+	isporuke koje su izvršene poslije 2012. godine.
 */
 select top 2 * from Person.Address
 select top 2 * from Sales.SalesOrderDetail
@@ -352,7 +371,8 @@ from Person.Address as PA
 where Year(SOH.ShipDate) > 2012
 group by PA.City, Year(SOH.ShipDate)
 /* 9
-Koristeći tabele Sales.Store, Sales.SalesPerson i SalesPersonQuotaHistory kreirati upit koji će dati sumu prodajnih kvota po nazivima prodavnica i ID teritorija, ali samo onih čija je suma veća od 2 000 000. Sortirati po ID teritorije i sumi.
+Koristeći tabele Sales.Store, Sales.SalesPerson i SalesPersonQuotaHistory kreirati upit koji će dati sumu prodajnih kvota po nazivima prodavnica i ID teritorija, 
+	ali samo onih čija je suma veća od 2 000 000. Sortirati po ID teritorije i sumi.
 */
 select top 2 * from Sales.Store
 select top 2 * from Sales.SalesPerson
@@ -375,7 +395,9 @@ ALTER AUTHORIZATION ON DATABASE::AdventureWorks2014 TO sa;
 GO
 
 /* 10
-Koristeći tabele Person.Person, Person.PersonPhone, Person.PhoneNumberType i Person.Password kreirati upit kojim će se dati informacija da li PasswordHash sadrži bar jedan +. Ako sadrži u koloni status_hash dati poruku "da", inače ostaviti prazn0. Upit treba da sadrži kolone Person.Person.PersonType, Person.PersonPhone.PhoneNumber, Person.PhoneNumberType.Name, Person.Password.PasswordHash.
+Koristeći tabele Person.Person, Person.PersonPhone, Person.PhoneNumberType i Person.Password kreirati upit kojim će se dati informacija da li PasswordHash
+	sadrži bar jedan +. Ako sadrži u koloni status_hash dati poruku "da", inače ostaviti prazn0. Upit treba da sadrži kolone Person.Person.PersonType, 
+	Person.PersonPhone.PhoneNumber, Person.PhoneNumberType.Name, Person.Password.PasswordHash.
 */
 select top 5 * from Person.Password
 
@@ -410,7 +432,8 @@ from
 where charindex('+', PW.PasswordHash) = 0
 
 /* 11
-Koristeći tabele HumanResources.Employee i HumanResources.EmployeeDepartmentHistory kreirati upit koji će dati pregled ukupno ostaverenih bolovanja (SickLeaveHours) po departmentu, pri čemu će se uzeti u obzir samo one osobe čiji nacionalni broj počinje ciframa 10, 20, 80 ili 90.
+Koristeći tabele HumanResources.Employee i HumanResources.EmployeeDepartmentHistory kreirati upit koji će dati pregled ukupno ostaverenih bolovanja 
+	(SickLeaveHours) po departmentu, pri čemu će se uzeti u obzir samo one osobe čiji nacionalni broj počinje ciframa 10, 20, 80 ili 90.
 */
 select top 5 * from HumanResources.Employee
 select top 5 * from HumanResources.EmployeeDepartmentHistory
@@ -502,7 +525,8 @@ Uslov je da se ne prikazuju upiti u kojima nije unijeta vrijednost za CatalogDes
 --Probajte za vježbu
  
 /* 15
-Koristeći tabelu Production.Product kreirati upit koji će prebrojati broj zapisa iza tabele po bojama. Navesti i broj zapisa u kojima nije unijeta vrijednost za boju i dati poruku "nije unijeta vrijednost".
+Koristeći tabelu Production.Product kreirati upit koji će prebrojati broj zapisa iza tabele po bojama. Navesti i broj zapisa u kojima nije unijeta
+	vrijednost za boju i dati poruku "nije unijeta vrijednost".
 */
 select * from Production.Product
 --Koristiti uniju
