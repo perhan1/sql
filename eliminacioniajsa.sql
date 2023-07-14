@@ -29,12 +29,12 @@ Broj narudzbi Ime                                                Srednje ime    
 27            Hailey                                             I                                                  Patterson
 
 ...
-Koristeæi tabele Person.Person, Sales.Customer i Sales.SalesOrderHeader,
- prikazati izvještaj o broju kupovina svakog kupca.
+KoristeÃ¦i tabele Person.Person, Sales.Customer i Sales.SalesOrderHeader,
+ prikazati izvjeÅ¡taj o broju kupovina svakog kupca.
 
 Potrebno je prikazati:
 
-                - Broj narudzbi (ukupan broj narudžbi odreðenog kupca)
+                - Broj narudzbi (ukupan broj narudÅ¾bi odreÃ°enog kupca)
 
                 - Ime (FirstName)
 
@@ -58,14 +58,14 @@ su agregatne fje*/
 /*
 
 2.
-Koristeæi tabele Person.Address, Sales.SalesOrderDetail i Sales.SalesOrderHeader kreirati upit koji æe dati
- sumu naruèenih kolièina po gradu i godini isporuke koje su izvršene poslije 2012. godine, a gdje je suma 
- veæa od 2000. 
- Rezultat poredati po sumi naruèenih kolièina na silazni naèin.
+KoristeÃ¦i tabele Person.Address, Sales.SalesOrderDetail i Sales.SalesOrderHeader kreirati upit koji Ã¦e dati
+ sumu naruÃ¨enih koliÃ¨ina po gradu i godini isporuke koje su izvrÅ¡ene poslije 2012. godine, a gdje je suma 
+ veÃ¦a od 2000. 
+ Rezultat poredati po sumi naruÃ¨enih koliÃ¨ina na silazni naÃ¨in.
 
  Izlaz:
 -------- ----------------- -----------------------
-Grad	 Godina isporuke   Suma naruèenih kolièina
+Grad	 Godina isporuke   Suma naruÃ¨enih koliÃ¨ina
 -------- ----------------- -----------------------
 Toronto	 2013			   5719
 London	 2013			   3572
@@ -87,9 +87,9 @@ Toronto	 2014	           2319
 
  /* 
  3.
-Koristeæi tabele Employee, Order Details i Orders baze Northwind kreirati upit
-koji æe sadržavati ime uposlenika i ukupnu vrijednost svih narudžbi koje je taj uposlenik 
-napravio u 1997. godini ako je ukupna vrijednost veæa od 50000, pri èemu æe se rezultati 
+KoristeÃ¦i tabele Employee, Order Details i Orders baze Northwind kreirati upit
+koji Ã¦e sadrÅ¾avati ime uposlenika i ukupnu vrijednost svih narudÅ¾bi koje je taj uposlenik 
+napravio u 1997. godini ako je ukupna vrijednost veÃ¦a od 50000, pri Ã¨emu Ã¦e se rezultati 
 grupisati prema polju ime.
 
 Rezultat:
@@ -139,9 +139,9 @@ where (2023-YEAR(E.BirthDate)) > 30
 
 /*
 5. Iz tabela Employees, Order Details i Orders baze Northwind prikazati ime i prezime uposlenika 
-kao polje ime i prezime, jediniènu cijenu, kolièinu i izraèunatu vrijednost 
-pojedinaène narudžbe kao polje izracunato za sve narudžbe u 1997. godini, 
-pri èemu æe se rezultati sortirati prema novokreiranom polju izracunato.*/
+kao polje ime i prezime, jediniÃ¨nu cijenu, koliÃ¨inu i izraÃ¨unatu vrijednost 
+pojedinaÃ¨ne narudÅ¾be kao polje izracunato za sve narudÅ¾be u 1997. godini, 
+pri Ã¨emu Ã¦e se rezultati sortirati prema novokreiranom polju izracunato.*/
 
 select E.FirstName + ' ' + E.LastName 'ime i prezime', 
 OD.UnitPrice 'jedinicna cijena', OD.Quantity 'kolicina', 
@@ -155,9 +155,9 @@ order by (OD.UnitPrice * OD.Quantity) * (1-OD.Discount)
 
 /*
 6. Iz tabela Employee, Order Details i Orders baze Northwind prikazati ime uposlenika i ukupnu vrijednost
- svih narudžbi koje je taj uposlenik napravio u 1996. godini ako je ukupna vrijednost
- veæa od 50000, pri èemu æe se rezultati sortirati uzlaznim redoslijedom prema polju ime.
-  Vrijednost sume zaokružiti na dvije decimale.*/
+ svih narudÅ¾bi koje je taj uposlenik napravio u 1996. godini ako je ukupna vrijednost
+ veÃ¦a od 50000, pri Ã¨emu Ã¦e se rezultati sortirati uzlaznim redoslijedom prema polju ime.
+  Vrijednost sume zaokruÅ¾iti na dvije decimale.*/
 
   select E.FirstName 'ime', round(SUM( OD.UnitPrice*OD.Quantity),2) 'ukupna vrijenost'
   from Employees E inner join Orders O on E.EmployeeID = O.EmployeeID inner join
@@ -168,9 +168,9 @@ order by (OD.UnitPrice * OD.Quantity) * (1-OD.Discount)
   order by E.FirstName
 
 /*
-7.Iz tabela Categories, Products i Suppliers baze Northwind prikazati naziv isporuèitelja (dobavljaèa), 
-mjesto i državu isporuèitelja (dobavljaèa) i naziv(e) proizvoda iz kategorije 
-napitaka (piæa) kojih na stanju ima više od 30 jedinica. Rezultat upita sortirati po državi.
+7.Iz tabela Categories, Products i Suppliers baze Northwind prikazati naziv isporuÃ¨itelja (dobavljaÃ¨a), 
+mjesto i drÅ¾avu isporuÃ¨itelja (dobavljaÃ¨a) i naziv(e) proizvoda iz kategorije 
+napitaka (piÃ¦a) kojih na stanju ima viÅ¡e od 30 jedinica. Rezultat upita sortirati po drÅ¾avi.
 */
 
 
@@ -183,3 +183,16 @@ order by S.Country
 
 select CategoryName from Categories
 
+/* KoristeÃ¦i tabele Orders i Order Details kreirati upit koji Ã¦e dati sumu koliÃ¨ina (Quantity) 
+po Order ID, pri Ã¨emu je uslov da je vrijednost Freighta veÃ¦a od svih vrijednosti Freighta narudÅ¾bi 
+realiziranih u 10. mjesecu 1997. godine. 
+Rezultat:
+OrderID	suma
+10372	164
+10540	165
+11030	330 */
+SELECT Orders.OrderID, SUM([Order Details].Quantity)
+FROM Orders JOIN [Order Details] 
+ON Orders.OrderID=[Order Details].OrderID
+WHERE Orders.Freight > (SELECT MAX(Freight) FROM Orders WHERE MONTH(ShippedDate)=10)
+GROUP BY Orders.OrderID
