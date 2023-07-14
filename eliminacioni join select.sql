@@ -18,7 +18,8 @@ from
 select emp_id,fname,employee.job_id,job_desc
 from  employee inner join jobs on jobs.job_id=employee.job_id
 /*
-3. Iz tabela Employees, EmployeeTerritories, Territories i Region baze Northwind prikazati prezime i ime uposlenika kao polje ime i prezime, teritorije i regiju koju pokrivaju i stariji su od 30 godina.*/
+3. Iz tabela Employees, EmployeeTerritories, Territories i Region baze Northwind prikazati prezime i ime uposlenika kao polje ime i prezime, teritorije i 
+	regiju koju pokrivaju i stariji su od 30 godina.*/
 use NORTHWND
 select LastName + ' ' + FirstName as 'Prezime i ime', TerritoryDescription, RegionDescription
 from Employees inner join EmployeeTerritories on Employees.EmployeeID=EmployeeTerritories.EmployeeID
@@ -27,7 +28,9 @@ inner join  Region on Region.RegionID=Territories.RegionID
 --where GETDATE()-BirthDate>30
 where datediff(yyyy, BirthDate, GetDate())>30
 /*
-4. Iz tabela Employees, Order Details i Orders baze Northwind prikazati ime i prezime uposlenika kao polje ime i prezime, jediničnu cijenu, količinu i izračunatu vrijednost pojedinačne narudžbe kao polje izracunato za sve narudžbe u 1997. godini, pri čemu će se rezultati sortirati prema novokreiranom polju izracunato.*/
+4. Iz tabela Employees, Order Details i Orders baze Northwind prikazati ime i prezime uposlenika kao polje ime i prezime, jediničnu cijenu, količinu i 
+	izračunatu vrijednost pojedinačne narudžbe kao polje izracunato za sve narudžbe u 1997. godini, pri čemu će se rezultati sortirati prema novokreiranom polju 
+	izracunato.*/
 select * from Employees
 select * from [Order Details]
 select * from Orders
@@ -39,7 +42,8 @@ where year(OrderDate)=1997
 order by 4
 
 /*
-5. Iz tabela Employees, Order Details i Orders baze Northwind prikazati ime uposlenika i ukupnu vrijednost svih narudžbi koje je taj uposlenik napravio u 1996. godini ako je ukupna vrijednost veća od 5000, pri čemu će se rezultati sortirati uzlaznim redoslijedom prema polju ime. Vrijednost sume zaokružiti na dvije decimale.*/
+5. Iz tabela Employees, Order Details i Orders baze Northwind prikazati ime uposlenika i ukupnu vrijednost svih narudžbi koje je taj uposlenik napravio u 1996. godini 
+	ako je ukupna vrijednost veća od 5000, pri čemu će se rezultati sortirati uzlaznim redoslijedom prema polju ime. Vrijednost sume zaokružiti na dvije decimale.*/
 select FirstName+' '+LastName as 'Ime i prezime', round(sum(UnitPrice*Quantity*(1-Discount)),2) as UkupnaVrijednost 
 from Employees join Orders on Orders.EmployeeID=Employees.EmployeeID
 	join [Order Details] on Orders.OrderID=[Order Details].OrderID
@@ -88,7 +92,8 @@ select employee.emp_id, employee.fname, jobs.job_id, jobs.job_desc
 from employee join jobs on employee.job_id=jobs.job_id
 
 /*
-3. Iz tabela Employees, EmployeeTerritories, Territories i Region baze Northwind prikazati prezime i ime uposlenika kao polje ime i prezime, teritorije i regiju koju pokrivaju i stariji su od 30 godina.*/
+3. Iz tabela Employees, EmployeeTerritories, Territories i Region baze Northwind prikazati prezime i ime uposlenika kao polje ime i prezime, teritorije i 
+	regiju koju pokrivaju i stariji su od 30 godina.*/
 
 --Sada imamo 4 tabele koje treba povezati. Koliko ćemo imati spojeva? Odgovor: 3 spoja
 --Prvo pronađimo strane ključeve. Može nam pomoći dijagram
@@ -106,7 +111,9 @@ join Region as r on r.RegionID = t.RegionID
 where year(getdate())-year(BirthDate)>30
 
 /*
-4. Iz tabela Employees, Order Details i Orders baze Northwind prikazati ime i prezime uposlenika kao polje ime i prezime, jediničnu cijenu, količinu i izračunatu vrijednost pojedinačne narudžbe kao polje izracunato za sve narudžbe u 1997. godini, pri čemu će se rezultati sortirati prema novokreiranom polju izracunato.*/
+4. Iz tabela Employees, Order Details i Orders baze Northwind prikazati ime i prezime uposlenika kao polje ime i prezime, jediničnu cijenu, količinu i 
+	izračunatu vrijednost pojedinačne narudžbe kao polje izracunato za sve narudžbe u 1997. godini, pri čemu će se rezultati sortirati prema novokreiranom polju 
+	izracunato.*/
 select FirstName + ' ' + LastName as ImePrezime, UnitPrice, Quantity, UnitPrice*Quantity as izracun
 from Employees
 join [Order Details] on [Order Details].OrderID = OrderID
@@ -115,7 +122,8 @@ where year(Orders.OrderDate) = 1997
 order by izracun
 
 /*
-5. Iz tabela Employees, Order Details i Orders baze Northwind prikazati ime uposlenika i ukupnu vrijednost svih narudžbi koje je taj uposlenik napravio u 1996. godini ako je ukupna vrijednost veća od 5000, pri čemu će se rezultati sortirati uzlaznim redoslijedom prema polju ime. Vrijednost sume zaokružiti na dvije decimale.*/
+5. Iz tabela Employees, Order Details i Orders baze Northwind prikazati ime uposlenika i ukupnu vrijednost svih narudžbi koje je taj uposlenik napravio u 1996. godini
+	ako je ukupna vrijednost veća od 5000, pri čemu će se rezultati sortirati uzlaznim redoslijedom prema polju ime. Vrijednost sume zaokružiti na dvije decimale.*/
 select FirstName + ' ' + LastName as 'Ime i Prezime', round(sum(UnitPrice*Quantity),2) as UkupnaVrijednost
 from Employees join Orders on Orders.EmployeeID = Employees.EmployeeID join [Order Details] on Orders.OrderID=[Order Details].OrderID
 where year(OrderDate) = 1996
